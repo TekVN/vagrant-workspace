@@ -227,13 +227,13 @@ function dbexport() {
     echo "Exporting databases to '$FILE'"
 
     if __has_pv; then
-        ADJUSTED_SIZE=$(mysql --vertical -udevbox -psecret -e "$SIZE_QUERY" 2>/dev/null | grep 'size' | awk '{print $2}')
+        ADJUSTED_SIZE=$(mysql --vertical -udevweb -psecret -e "$SIZE_QUERY" 2>/dev/null | grep 'size' | awk '{print $2}')
         HUMAN_READABLE_SIZE=$(numfmt --to=iec-i --suffix=B --format="%.3f" $ADJUSTED_SIZE)
 
         echo "Estimated uncompressed size: $HUMAN_READABLE_SIZE"
-        mysqldump -udevbox -psecret --all-databases --skip-lock-tables --routines 2>/dev/null | pv --size=$ADJUSTED_SIZE | gzip >"$FILE"
+        mysqldump -udevweb -psecret --all-databases --skip-lock-tables --routines 2>/dev/null | pv --size=$ADJUSTED_SIZE | gzip >"$FILE"
     else
-        mysqldump -udevbox -psecret --all-databases --skip-lock-tables --routines 2>/dev/null | gzip >"$FILE"
+        mysqldump -udevweb -psecret --all-databases --skip-lock-tables --routines 2>/dev/null | gzip >"$FILE"
     fi
 
     echo "Done."
@@ -247,9 +247,9 @@ function dbimport() {
     echo "Importing databases from '$FILE'"
 
     if __has_pv; then
-        pv "$FILE" --progress --eta | zcat | mysql -udevbox -psecret 2>/dev/null
+        pv "$FILE" --progress --eta | zcat | mysql -udevweb -psecret 2>/dev/null
     else
-        cat "$FILE" | zcat | mysql -udevbox -psecret 2>/dev/null
+        cat "$FILE" | zcat | mysql -udevweb -psecret 2>/dev/null
     fi
 
     echo "Done."

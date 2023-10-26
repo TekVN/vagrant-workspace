@@ -3,8 +3,8 @@
 # Check If xhgui Has Been Installed
 
 if [ -f /home/vagrant/.features/xhgui ]; then
-    echo "xhgui already installed."
-    exit 0
+  echo "xhgui already installed."
+  exit 0
 fi
 
 touch /home/vagrant/.features/xhgui
@@ -53,7 +53,7 @@ return array(
     //
     'db.host' => 'mongodb://127.0.0.1:27017',
     'db.db' => 'xhprof',
-    'db.options' => array('username' => 'devbox', 'password' => 'secret'),
+    'db.options' => array('username' => 'devweb', 'password' => 'secret'),
 
     // Whether to instrument a user request.
     //
@@ -143,7 +143,7 @@ cd /opt/xhgui
 php install.php
 
 for version in 5.6 7.0 7.1 7.2 7.3 7.4; do
-    cat <<'EOT' >/etc/php/$version/mods-available/xhgui.ini
+  cat <<'EOT' >/etc/php/$version/mods-available/xhgui.ini
 ; Include xhgui's header for performance profiling.
 auto_prepend_file="/opt/xhgui/external/header.php"
 EOT

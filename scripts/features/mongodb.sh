@@ -82,4 +82,4 @@ sudo ln -s /etc/php/8.2/mods-available/mongo.ini /etc/php/8.2/cli/conf.d/20-mong
 sudo ln -s /etc/php/8.2/mods-available/mongo.ini /etc/php/8.2/fpm/conf.d/20-mongo.ini
 sudo service php8.2-fpm restart
 
-mongosh admin --eval "db.createUser({user:'devbox',pwd:'secret',roles:['root']})"
+mongosh admin --eval "db.createUser({user:'devweb',pwd:'secret',roles:['root']})"

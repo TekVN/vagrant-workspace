@@ -30,4 +30,4 @@ rm solr-7.7.1.tgz install_solr_service.sh
 
 # Install Devweb Core
 
-sudo su -c "/opt/solr/bin/solr create -c devbox" solr
+sudo su -c "/opt/solr/bin/solr create -c devweb" solr

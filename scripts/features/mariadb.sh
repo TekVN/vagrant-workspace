@@ -60,9 +60,9 @@ mysql --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO roo
 mysql --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
 service mysql restart
 
-mysql --user="root" --password="secret" -h localhost -e "CREATE USER IF NOT EXISTS 'devbox'@'0.0.0.0' IDENTIFIED BY 'secret';"
-mysql --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO 'devbox'@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
-mysql --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO 'devbox'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mysql --user="root" --password="secret" -h localhost -e "CREATE USER IF NOT EXISTS 'devweb'@'0.0.0.0' IDENTIFIED BY 'secret';"
+mysql --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO 'devweb'@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mysql --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO 'devweb'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
 mysql --user="root" --password="secret" -h localhost -e "FLUSH PRIVILEGES;"
 service mysql restart
 

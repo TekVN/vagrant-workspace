@@ -8,6 +8,6 @@ if [ -z "$postgres" ]; then
     echo "We didn't find a PID for postgres, skipping \$DB creation"
 else
     if ! su postgres -c "psql $DB -c '\q' 2>/dev/null"; then
-        su postgres -c "createdb -O devbox '$DB'"
+        su postgres -c "createdb -O devweb '$DB'"
     fi
 fi
