@@ -30,7 +30,7 @@ abstract class Settings
     abstract public static function fromFile($filename);
 
     /**
-     * Save the devbox settings.
+     * Save the devweb settings.
      *
      * @param  string  $filename
      * @return void
@@ -38,7 +38,7 @@ abstract class Settings
     abstract public function save($filename);
 
     /**
-     * Update the devbox settings.
+     * Update the devweb settings.
      *
      * @param  array  $attributes
      * @return static

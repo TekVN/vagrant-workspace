@@ -11,7 +11,7 @@ keys:
 
 folders:
     - map: ~/code
-      to: /var/www/code
+      to: /var/www
 
 sites:
     - map: devweb.test

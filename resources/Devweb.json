@@ -13,11 +13,11 @@
     ],
     "sites": [
         {
-            "map": "devbox.test",
+            "map": "devweb.test",
             "to": "/var/www/laravel/public"
         }
     ],
-    "databases": ["devbox"],
+    "databases": ["devweb"],
     "features": [
         {
             "mysql": true
