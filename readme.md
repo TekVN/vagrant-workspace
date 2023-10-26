@@ -10,9 +10,6 @@
     <a href="https://packagist.org/packages/ducconit/devweb">
         <img src="https://img.shields.io/packagist/v/ducconit/devweb" alt="Latest Stable Version">
     </a>
-    <a href="https://packagist.org/packages/ducconit/devweb">
-        <img src="https://img.shields.io/packagist/l/ducconit/devweb" alt="License">
-    </a>
 </p>
 
 ## Giới thiệu
