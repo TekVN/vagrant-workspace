@@ -274,3 +274,7 @@ function xphp() {
 
     if ! $XDEBUG_ENABLED; then xoff; fi
 }
+
+function listen-port() {
+    sudo ss -tunpl | grep ${1:-LISTEN}
+}
