@@ -26,10 +26,12 @@ features:
     - postgresql: false
     - ohmyzsh: false
     - webdriver: false
+    - soketi: false
 
 services:
     - enabled:
           - "mysql"
+          - "php8.1-fpm"
 #    - disabled:
 #        - "postgresql"
 
