@@ -1,0 +1,37 @@
+{
+    "ip": "192.168.9.12",
+    "memory": 2048,
+    "cpus": 2,
+    "provider": "virtualbox",
+    "authorize": "~/.ssh/id_rsa.pub",
+    "keys": ["~/.ssh/id_rsa"],
+    "folders": [
+        {
+            "map": "~/code",
+            "to": "/var/www"
+        }
+    ],
+    "sites": [
+        {
+            "map": "devbox.test",
+            "to": "/var/www/laravel/public"
+        }
+    ],
+    "databases": ["devbox"],
+    "features": [
+        {
+            "mysql": true
+        },
+        {
+            "postgresql": false
+        },
+        {
+            "webdriver": false
+        }
+    ],
+    "services": [
+        {
+            "mysql": true
+        }
+    ]
+}

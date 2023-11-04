@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+
+// Are we running global or per project?
+if (is_file(__DIR__ . '/../vendor/autoload.php')) {
+    require  __DIR__ . '/../vendor/autoload.php';
+} else {
+    require __DIR__ . '/../../../autoload.php';
+}
+
+$app = new Symfony\Component\Console\Application('DEVWEB ENVIRONMENT', '14.5.0');
+
+$app->add(new DNT\Devweb\MakeCommand);
+$app->add(new DNT\Devweb\WslApplyFeatures);
+$app->add(new DNT\Devweb\WslCreateSiteCommand);
+$app->add(new DNT\Devweb\WslCreateDatabaseCommand());
+
+$app->run();

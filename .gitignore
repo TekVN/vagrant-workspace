@@ -1,0 +1,15 @@
+/vendor
+/.vagrant
+phpunit.xml
+/Devweb.yaml
+/Devweb.json
+/after.sh
+/aliases
+/mysqldump.sql.gz
+/mysql_backup
+/postgres_backup
+/user-customizations.sh
+.phpunit.result.cache
+wsl-init.log
+.backup/*
+.DS_Store
