@@ -1,6 +1,6 @@
 <?php
 
-namespace DNT\Devweb\Traits;
+namespace VinaCoder\Workspace\Traits;
 
 trait GeneratesSlugs
 {

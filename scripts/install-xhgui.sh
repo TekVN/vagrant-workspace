@@ -53,7 +53,7 @@ return array(
     //
     'db.host' => 'mongodb://127.0.0.1:27017',
     'db.db' => 'xhprof',
-    'db.options' => array('username' => 'devweb', 'password' => 'secret'),
+    'db.options' => array('username' => 'workspace', 'password' => 'secret'),
 
     // Whether to instrument a user request.
     //

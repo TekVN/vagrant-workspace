@@ -3,7 +3,7 @@
 namespace Tests\Settings;
 
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
-use DNT\Devweb\Settings\YamlSettings;
+use VinaCoder\Workspace\Settings\YamlSettings;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 use Tests\Traits\GeneratesTestDirectory;
@@ -15,7 +15,7 @@ class YamlSettingsTest extends TestCase
     /** @test */
     public function it_can_be_created_from_a_filename()
     {
-        $settings = YamlSettings::fromFile(__DIR__ . '/../../resources/Devweb.yaml');
+        $settings = YamlSettings::fromFile(__DIR__ . '/../../resources/Workspace.yaml');
 
         self::assertArraySubset([
             'ip' => '192.168.9.12',
@@ -32,7 +32,7 @@ class YamlSettingsTest extends TestCase
             'memory' => '2048',
             'cpus' => 1,
         ]);
-        $filename = self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml';
+        $filename = self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml';
 
         $settings->save($filename);
 
@@ -127,7 +127,7 @@ class YamlSettingsTest extends TestCase
         $settings = new YamlSettings([
             'sites' => [
                 [
-                    'map' => 'devweb.test',
+                    'map' => 'workspace.test',
                     'to' => '/home/vagrant/Laravel/public',
                     'type' => 'laravel',
                     'schedule' => true,
@@ -140,7 +140,7 @@ class YamlSettingsTest extends TestCase
 
         $attributes = $settings->toArray();
         $this->assertEquals([
-            'map' => 'devweb.test',
+            'map' => 'workspace.test',
             'to' => '/home/vagrant/Laravel/public',
             'type' => 'laravel',
             'schedule' => true,

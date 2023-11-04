@@ -1,10 +1,10 @@
 <?php
 
-namespace DNT\Devweb;
+namespace VinaCoder\Workspace;
 
-use DNT\Devweb\Settings\JsonSettings;
-use DNT\Devweb\Settings\YamlSettings;
-use DNT\Devweb\Traits\GeneratesSlugs;
+use VinaCoder\Workspace\Settings\JsonSettings;
+use VinaCoder\Workspace\Settings\YamlSettings;
+use VinaCoder\Workspace\Traits\GeneratesSlugs;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -48,14 +48,14 @@ class MakeCommand extends Command
 
         $this
             ->setName('make')
-            ->setDescription('Install Devweb into the current project')
+            ->setDescription('Install Workspace into the current project')
             ->addOption('name', null, InputOption::VALUE_OPTIONAL, 'The name of the virtual machine.', $this->defaultProjectName)
             ->addOption('hostname', null, InputOption::VALUE_OPTIONAL, 'The hostname of the virtual machine.', $this->defaultProjectName)
             ->addOption('ip', null, InputOption::VALUE_OPTIONAL, 'The IP address of the virtual machine.')
             ->addOption('no-after', null, InputOption::VALUE_NONE, 'Determines if the after.sh file is not created.')
             ->addOption('no-aliases', null, InputOption::VALUE_NONE, 'Determines if the aliases file is not created.')
-            ->addOption('example', null, InputOption::VALUE_NONE, 'Determines if a Devweb example file is created.')
-            ->addOption('json', null, InputOption::VALUE_NONE, 'Determines if the Devweb settings file will be in json format.');
+            ->addOption('example', null, InputOption::VALUE_NONE, 'Determines if a Workspace example file is created.')
+            ->addOption('json', null, InputOption::VALUE_NONE, 'Determines if the Workspace settings file will be in json format.');
     }
 
     /**
@@ -95,19 +95,19 @@ class MakeCommand extends Command
 
         $this->checkForDuplicateConfigs($output);
 
-        $output->writeln('Devweb Installed!');
+        $output->writeln('Workspace Installed!');
 
         return 0;
     }
 
     /**
-     * Determines if Devweb has been installed "per project".
+     * Determines if Workspace has been installed "per project".
      *
      * @return bool
      */
     protected function isPerProjectInstallation()
     {
-        return (bool) preg_match('/vendor\/dnt\/devweb/', __DIR__);
+        return (bool) preg_match('/vendor\/dnt\/workspace/', __DIR__);
     }
 
     /**
@@ -182,7 +182,7 @@ class MakeCommand extends Command
      */
     protected function settingsFileExists($format)
     {
-        return file_exists("{$this->basePath}/Devweb.{$format}");
+        return file_exists("{$this->basePath}/Workspace.{$format}");
     }
 
     /**
@@ -197,8 +197,8 @@ class MakeCommand extends Command
         $SettingsClass = ($format === 'json') ? JsonSettings::class : YamlSettings::class;
 
         $filename = $this->exampleSettingsExists($format) ?
-            "{$this->basePath}/Devweb.{$format}.example" :
-            __DIR__ . "/../resources/Devweb.{$format}";
+            "{$this->basePath}/Workspace.{$format}.example" :
+            __DIR__ . "/../resources/Workspace.{$format}";
 
         $settings = $SettingsClass::fromFile($filename);
 
@@ -210,7 +210,7 @@ class MakeCommand extends Command
         $settings->updateIpAddress($options['ip'])
             ->configureSites($this->projectName, $this->defaultProjectName)
             ->configureSharedFolders($this->basePath, $this->defaultProjectName)
-            ->save("{$this->basePath}/Devweb.{$format}");
+            ->save("{$this->basePath}/Workspace.{$format}");
     }
 
     /**
@@ -221,7 +221,7 @@ class MakeCommand extends Command
      */
     protected function exampleSettingsExists($format)
     {
-        return file_exists("{$this->basePath}/Devweb.{$format}.example");
+        return file_exists("{$this->basePath}/Workspace.{$format}.example");
     }
 
     /**
@@ -232,7 +232,7 @@ class MakeCommand extends Command
      */
     protected function createExampleSettingsFile($format)
     {
-        copy("{$this->basePath}/Devweb.{$format}", "{$this->basePath}/Devweb.{$format}.example");
+        copy("{$this->basePath}/Workspace.{$format}", "{$this->basePath}/Workspace.{$format}.example");
     }
 
     /**
@@ -245,12 +245,12 @@ class MakeCommand extends Command
      */
     protected function checkForDuplicateConfigs(OutputInterface $output)
     {
-        if (file_exists("{$this->basePath}/Devweb.yaml") && file_exists("{$this->basePath}/Devweb.json")) {
+        if (file_exists("{$this->basePath}/Workspace.yaml") && file_exists("{$this->basePath}/Workspace.json")) {
             $output->writeln(
-                '<error>WARNING! You have Devweb.yaml AND Devweb.json configuration files</error>'
+                '<error>WARNING! You have Workspace.yaml AND Workspace.json configuration files</error>'
             );
             $output->writeln(
-                '<error>WARNING! Devweb will not use Devweb.json until you rename or delete the Devweb.yaml</error>'
+                '<error>WARNING! Workspace will not use Workspace.json until you rename or delete the Workspace.yaml</error>'
             );
         }
     }

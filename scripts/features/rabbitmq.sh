@@ -59,10 +59,10 @@ sudo apt-get install rabbitmq-server php-amqp php-bcmath -y --fix-missing
 
 # Enable RabbitMQ HTTP Admin Interface
 sudo rabbitmq-plugins enable rabbitmq_management
-sudo rabbitmqctl add_user devweb secret
-sudo rabbitmqctl set_user_tags devweb administrator
-sudo rabbitmqctl set_permissions -p / devweb ".*" ".*" ".*"
-sudo rabbitmqctl set_topic_permissions -p / devweb ".*" ".*" ".*"
+sudo rabbitmqctl add_user workspace secret
+sudo rabbitmqctl set_user_tags workspace administrator
+sudo rabbitmqctl set_permissions -p / workspace ".*" ".*" ".*"
+sudo rabbitmqctl set_topic_permissions -p / workspace ".*" ".*" ".*"
 
 # Install rabbitmqadmin CLI tool - https://www.rabbitmq.com/management-cli.html
 sudo wget -q http://localhost:15672/cli/rabbitmqadmin -O /usr/local/bin/rabbitmqadmin

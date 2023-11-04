@@ -5,7 +5,7 @@
 # - Expressive
 # - zend-mvc
 #
-# Type declaration in Devweb.yaml should be one of:
+# Type declaration in Workspace.yaml should be one of:
 #
 # - apigility
 # - expressive

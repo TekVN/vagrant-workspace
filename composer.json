@@ -1,5 +1,5 @@
 {
-    "name": "ducconit/devweb",
+    "name": "vinacoder/workspace",
     "description": "Your ideal web development environment.",
     "require": {
         "php": "^7.4 || ^8.0",
@@ -28,7 +28,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "DNT\\Devweb\\": "src/"
+            "VinaCoder\\Workspace\\": "src/"
         }
     },
     "autoload-dev": {
@@ -37,6 +37,6 @@
         }
     },
     "bin": [
-        "bin/devweb"
+        "bin/workspace"
     ]
 }

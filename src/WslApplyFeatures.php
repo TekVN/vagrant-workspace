@@ -1,10 +1,10 @@
 <?php
 
-namespace DNT\Devweb;
+namespace VinaCoder\Workspace;
 
-use DNT\Devweb\Settings\JsonSettings;
-use DNT\Devweb\Settings\YamlSettings;
-use DNT\Devweb\Traits\GeneratesSlugs;
+use VinaCoder\Workspace\Settings\JsonSettings;
+use VinaCoder\Workspace\Settings\YamlSettings;
+use VinaCoder\Workspace\Traits\GeneratesSlugs;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -105,7 +105,7 @@ class WslApplyFeatures extends Command
     protected function parseSettingsFromFile(string $format, array $options)
     {
         $SettingsClass = ($format === 'json') ? JsonSettings::class : YamlSettings::class;
-        $filename = __DIR__ . "/../Devweb.{$format}";
+        $filename = __DIR__ . "/../Workspace.{$format}";
 
         return $SettingsClass::fromFile($filename)->toArray();
     }

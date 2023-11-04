@@ -3,10 +3,10 @@
 set -f
 PATH_SSL="/etc/ssl/certs"
 
-# Path to the custom Devweb $(hostname) Root CA certificate.
-PATH_ROOT_CNF="${PATH_SSL}/ca.devweb.$(hostname).cnf"
-PATH_ROOT_CRT="${PATH_SSL}/ca.devweb.$(hostname).crt"
-PATH_ROOT_KEY="${PATH_SSL}/ca.devweb.$(hostname).key"
+# Path to the custom Workspace $(hostname) Root CA certificate.
+PATH_ROOT_CNF="${PATH_SSL}/ca.workspace.$(hostname).cnf"
+PATH_ROOT_CRT="${PATH_SSL}/ca.workspace.$(hostname).crt"
+PATH_ROOT_KEY="${PATH_SSL}/ca.workspace.$(hostname).key"
 
 # Path to the custom site certificate.
 PATH_CNF="${PATH_SSL}/${1}.cnf"
@@ -16,9 +16,9 @@ PATH_KEY="${PATH_SSL}/${1}.key"
 
 BASE_CNF="
     [ ca ]
-    default_ca = ca_devweb_$(hostname)
+    default_ca = ca_workspace_$(hostname)
 
-    [ ca_devweb_$(hostname) ]
+    [ ca_workspace_$(hostname) ]
     dir           = $PATH_SSL
     certs         = $PATH_SSL
     new_certs_dir = $PATH_SSL
@@ -75,7 +75,7 @@ if [ ! -f $PATH_ROOT_CNF ] || [ ! -f $PATH_ROOT_KEY ] || [ ! -f $PATH_ROOT_CRT ]
         [ req_distinguished_name ]
         O  = Vagrant
         C  = UN
-        CN = Devweb $(hostname) Root CA
+        CN = Workspace $(hostname) Root CA
     "
     echo "$cnf" >$PATH_ROOT_CNF
 
@@ -110,7 +110,7 @@ if [ ! -f $PATH_CNF ] || [ ! -f $PATH_KEY ] || [ ! -f $PATH_CRT ]; then
     "
     echo "$cnf" >$PATH_CNF
 
-    # Finally, generate the private key and certificate signed with the Devweb $(hostname) Root CA.
+    # Finally, generate the private key and certificate signed with the Workspace $(hostname) Root CA.
     openssl genrsa -out "$PATH_KEY" 2048 2>/dev/null
     openssl req -config "$PATH_CNF" \
         -key "$PATH_KEY" \

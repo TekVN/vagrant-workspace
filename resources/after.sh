@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Nếu bạn muốn thêm bất cứ thứ gì hay làm gì ngay sau khi Devweb đã sẵn sàng thì viết vào đây.
+# Nếu bạn muốn thêm bất cứ thứ gì hay làm gì ngay sau khi Workspace đã sẵn sàng thì viết vào đây.
 #
 # Nếu bạn có cấu hình dành riêng cho người dùng mà bạn muốn áp dụng, bạn cũng có thể tạo user-customizations.sh,
 # nó sẽ được chạy sau tập lệnh này.

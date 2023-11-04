@@ -3,7 +3,7 @@
 namespace Tests\Settings;
 
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
-use DNT\Devweb\Settings\JsonSettings;
+use VinaCoder\Workspace\Settings\JsonSettings;
 use PHPUnit\Framework\TestCase;
 use Tests\Traits\GeneratesTestDirectory;
 
@@ -14,7 +14,7 @@ class JsonSettingsTest extends TestCase
     /** @test */
     public function it_can_be_created_from_a_filename()
     {
-        $settings = JsonSettings::fromFile(__DIR__ . '/../../resources/Devweb.json');
+        $settings = JsonSettings::fromFile(__DIR__ . '/../../resources/Workspace.json');
 
         self::assertArraySubset([
             'ip' => '192.168.9.12',
@@ -31,7 +31,7 @@ class JsonSettingsTest extends TestCase
             'memory' => '2048',
             'cpus' => 1,
         ]);
-        $filename = self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json';
+        $filename = self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json';
 
         $settings->save($filename);
 
@@ -127,7 +127,7 @@ class JsonSettingsTest extends TestCase
         $settings = new JsonSettings([
             'sites' => [
                 [
-                    'map' => 'devweb.test',
+                    'map' => 'workspace.test',
                     'to' => '/home/vagrant/Laravel/public',
                     'type' => 'laravel',
                     'schedule' => true,
@@ -140,7 +140,7 @@ class JsonSettingsTest extends TestCase
 
         $attributes = $settings->toArray();
         $this->assertEquals([
-            'map' => 'devweb.test',
+            'map' => 'workspace.test',
             'to' => '/home/vagrant/Laravel/public',
             'type' => 'laravel',
             'schedule' => true,

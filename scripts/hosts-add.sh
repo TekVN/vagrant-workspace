@@ -10,7 +10,7 @@ if [[ "$1" && "$2" ]]; then
         echo "$HOSTNAME already exists:"
         echo $(grep [^\.]$HOSTNAME /etc/hosts)
     else
-        sudo sed -i "/#### DEVWEB-SITES-BEGIN/c\#### DEVWEB-SITES-BEGIN\\n$IP\t$HOSTNAME" /etc/hosts
+        sudo sed -i "/#### WORKSPACE-SITES-BEGIN/c\#### WORKSPACE-SITES-BEGIN\\n$IP\t$HOSTNAME" /etc/hosts
 
         if ! [ -n "$(grep [^\.]$HOSTNAME /etc/hosts)" ]; then
             echo "Failed to add $HOSTNAME."

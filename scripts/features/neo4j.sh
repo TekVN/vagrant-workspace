@@ -45,7 +45,7 @@ done
 
 # Add new Neo4j user
 cypher-shell -u neo4j -p neo4j "CALL dbms.changePassword('secret');"
-cypher-shell -u neo4j -p secret "CALL dbms.security.createUser('devweb', 'secret', false);"
+cypher-shell -u neo4j -p secret "CALL dbms.security.createUser('workspace', 'secret', false);"
 
 # Delete default Neo4j user
-cypher-shell -u devweb -p secret "CALL dbms.security.deleteUser('neo4j');"
+cypher-shell -u workspace -p secret "CALL dbms.security.deleteUser('neo4j');"

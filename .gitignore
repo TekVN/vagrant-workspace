@@ -1,8 +1,8 @@
 /vendor
 /.vagrant
 phpunit.xml
-/Devweb.yaml
-/Devweb.json
+/Workspace.yaml
+/Workspace.json
 /after.sh
 /aliases
 /mysqldump.sql.gz

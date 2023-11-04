@@ -28,6 +28,6 @@ tar xzf solr-7.7.1.tgz solr-7.7.1/bin/install_solr_service.sh --strip-components
 sudo bash ./install_solr_service.sh solr-7.7.1.tgz
 rm solr-7.7.1.tgz install_solr_service.sh
 
-# Install Devweb Core
+# Install Workspace Core
 
-sudo su -c "/opt/solr/bin/solr create -c devweb" solr
+sudo su -c "/opt/solr/bin/solr create -c workspace" solr

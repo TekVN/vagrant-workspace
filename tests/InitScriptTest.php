@@ -25,7 +25,7 @@ class InitScriptTest extends TestCase
     {
         $output = exec('bash init.sh');
 
-        $this->assertEquals('Devweb initialized!', $output);
+        $this->assertEquals('Workspace initialized!', $output);
     }
 
     /** @test */
@@ -33,7 +33,7 @@ class InitScriptTest extends TestCase
     {
         exec('bash init.sh');
 
-        $this->assertFileExists(self::$testDirectory . '/Devweb.yaml');
+        $this->assertFileExists(self::$testDirectory . '/Workspace.yaml');
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class InitScriptTest extends TestCase
     {
         exec('bash init.sh json');
 
-        $this->assertFileExists(self::$testDirectory . '/Devweb.json');
+        $this->assertFileExists(self::$testDirectory . '/Workspace.json');
     }
 
     /** @test */

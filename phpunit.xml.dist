@@ -6,7 +6,7 @@
     </include>
   </coverage>
   <testsuites>
-    <testsuite name="Devweb tests">
+    <testsuite name="Workspace tests">
       <directory>./tests</directory>
     </testsuite>
   </testsuites>

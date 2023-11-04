@@ -2,7 +2,7 @@
 
 # Clear The Old Environment Variables
 
-sed -i '/# Set Devweb Environment Variable/,+1d' /home/vagrant/.profile
+sed -i '/# Set Workspace Environment Variable/,+1d' /home/vagrant/.profile
 
 if [ -f /etc/php/7.4/fpm/pool.d/www.conf ]; then
     sed -i '/env\[.*/,+1d' /etc/php/7.4/fpm/pool.d/www.conf

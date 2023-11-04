@@ -38,7 +38,7 @@ MINIO_VOLUMES="/usr/local/share/minio/"
 # Use if you want to run Minio on a custom port.
 MINIO_OPTS="--config-dir /etc/minio --address :9600 --console-address :9601"
 MINIO_CONFIG_ENV_FILE=/etc/default/minio
-MINIO_ROOT_USER=devweb
+MINIO_ROOT_USER=workspace
 MINIO_ROOT_PASSWORD=secretkey
 
 EOT
@@ -63,4 +63,4 @@ fi
 
 chmod +x mc
 sudo mv mc /usr/local/bin
-mc config host add devweb http://127.0.1.1:9600 devweb secretkey
+mc config host add workspace http://127.0.1.1:9600 workspace secretkey

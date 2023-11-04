@@ -1,5 +1,5 @@
-# Main Devweb Class
-class Devweb
+# Main Workspace Class
+class Workspace
   def self.configure(config, settings)
     # Set The VM Provider
     ENV['VAGRANT_DEFAULT_PROVIDER'] = settings['provider'] ||= 'virtualbox'
@@ -16,12 +16,12 @@ class Devweb
     end
 
     # Configure The Box
-    config.vm.define settings['name'] ||= 'devweb'
+    config.vm.define settings['name'] ||= 'workspace'
     config.vm.box = settings['box'] ||= 'ducconit/devweb'
     unless settings.has_key?('SpeakFriendAndEnter')
       config.vm.box_version = settings['version'] ||= '>=1.0.0'
     end
-    config.vm.hostname = settings['hostname'] ||= 'devweb'
+    config.vm.hostname = settings['hostname'] ||= 'workspace'
 
     # Configure A Private Network IP
     if settings['ip'] != 'autonetwork'
@@ -39,7 +39,7 @@ class Devweb
 
     # Configure A Few VirtualBox Settings
     config.vm.provider 'virtualbox' do |vb|
-      vb.name = settings['name'] ||= 'devweb'
+      vb.name = settings['name'] ||= 'workspace'
       vb.customize ['modifyvm', :id, '--memory', settings['memory'] ||= '2048']
       vb.customize ['modifyvm', :id, '--cpus', settings['cpus'] ||= '1']
       vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
@@ -69,7 +69,7 @@ class Devweb
     # Configure A Few VMware Settings
     ['vmware_fusion', 'vmware_workstation', 'vmware_desktop'].each do |vmware|
       config.vm.provider vmware do |v|
-        v.vmx['displayName'] = settings['name'] ||= 'devweb'
+        v.vmx['displayName'] = settings['name'] ||= 'workspace'
         v.vmx['memsize'] = settings['memory'] ||= 2048
         v.vmx['numvcpus'] = settings['cpus'] ||= 1
         v.vmx['guestOS'] = 'ubuntu-64'
@@ -81,7 +81,7 @@ class Devweb
 
     # Configure A Few Hyper-V Settings
     config.vm.provider "hyperv" do |h, override|
-      h.vmname = settings['name'] ||= 'devweb'
+      h.vmname = settings['name'] ||= 'workspace'
       h.cpus = settings['cpus'] ||= 1
       h.memory = settings['memory'] ||= 2048
       h.linked_clone = true
@@ -102,7 +102,7 @@ class Devweb
 
     # Configure A Few Parallels Settings
     config.vm.provider 'parallels' do |v|
-      v.name = settings['name'] ||= 'devweb'
+      v.name = settings['name'] ||= 'workspace'
       v.update_guest_tools = settings['update_parallels_tools'] ||= false
       v.memory = settings['memory'] ||= 2048
       v.cpus = settings['cpus'] ||= 1
@@ -169,7 +169,7 @@ class Devweb
     # Copy The SSH Private Keys To The Box
     if settings.include? 'keys'
       if settings['keys'].to_s.length.zero?
-        puts 'Check your Devweb.yaml file, you have no private key(s) specified.'
+        puts 'Check your Workspace.yaml file, you have no private key(s) specified.'
         exit
       end
       settings['keys'].each do |key|
@@ -180,7 +180,7 @@ class Devweb
             s.args = [File.read(File.expand_path(key)), key.split('/').last]
           end
         else
-          puts 'Check your Devweb.yaml (or Devweb.json) file, the path to your private key does not exist.'
+          puts 'Check your Workspace.yaml (or Workspace.json) file, the path to your private key does not exist.'
           exit
         end
       end
@@ -232,7 +232,7 @@ class Devweb
           end
         else
           config.vm.provision 'shell' do |s|
-            s.inline = ">&2 echo \"Unable to mount one of your folders. Please check your folders in Devweb.yaml\""
+            s.inline = ">&2 echo \"Unable to mount one of your folders. Please check your folders in Workspace.yaml\""
           end
         end
       end
@@ -536,7 +536,7 @@ class Devweb
         end
 
         config.vm.provision 'shell' do |s|
-          s.inline = "echo \"\n# Set Devweb Environment Variable\nexport $1=$2\" >> /home/vagrant/.profile"
+          s.inline = "echo \"\n# Set Workspace Environment Variable\nexport $1=$2\" >> /home/vagrant/.profile"
           s.args = [var['key'], var['value']]
         end
       end
@@ -672,15 +672,15 @@ class Devweb
       settings['databases'].each do |database|
         # Backup MySQL/MariaDB
         if (enabled_databases.include? 'mysql') || (enabled_databases.include? 'mariadb')
-          Devweb.backup_mysql(database, "#{dir_prefix}/mysql_backup", config)
+          Workspace.backup_mysql(database, "#{dir_prefix}/mysql_backup", config)
         end
         # Backup PostgreSQL
         if enabled_databases.include? 'postgresql'
-          Devweb.backup_postgres(database, "#{dir_prefix}/postgres_backup", config)
+          Workspace.backup_postgres(database, "#{dir_prefix}/postgres_backup", config)
         end
         # Backup MongoDB
         if enabled_databases.include? 'mongodb'
-          Devweb.backup_mongodb(database, "#{dir_prefix}/mongodb_backup", config)
+          Workspace.backup_mongodb(database, "#{dir_prefix}/mongodb_backup", config)
         end
       end
     end

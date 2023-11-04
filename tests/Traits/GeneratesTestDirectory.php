@@ -16,7 +16,7 @@ trait GeneratesTestDirectory
      */
     public static function setUpBeforeClass(): void
     {
-        self::$testDirectory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('devweb_', true);
+        self::$testDirectory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('workspace_', true);
         mkdir(self::$testDirectory);
         chdir(self::$testDirectory);
     }

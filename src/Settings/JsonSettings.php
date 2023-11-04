@@ -1,6 +1,6 @@
 <?php
 
-namespace DNT\Devweb\Settings;
+namespace VinaCoder\Workspace\Settings;
 
 class JsonSettings extends Settings
 {
@@ -16,7 +16,7 @@ class JsonSettings extends Settings
     }
 
     /**
-     * Save the Devweb settings.
+     * Save the Workspace settings.
      *
      * @param  string  $filename
      * @return void

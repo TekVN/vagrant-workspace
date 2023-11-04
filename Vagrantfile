@@ -7,8 +7,8 @@ require 'yaml'
 VAGRANTFILE_API_VERSION ||= "2"
 confDir = $confDir ||= File.expand_path(File.dirname(__FILE__))
 
-configYamlPath = confDir + "/Devweb.yaml"
-configJsonPath = confDir + "/Devweb.json"
+configYamlPath = confDir + "/Workspace.yaml"
+configJsonPath = confDir + "/Workspace.json"
 afterScriptPath = confDir + "/after.sh"
 customizationScriptPath = confDir + "/user-customizations.sh"
 aliasesPath = confDir + "/aliases"
@@ -30,10 +30,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     elsif File.exist? configJsonPath then
         settings = JSON::parse(File.read(configJsonPath))
     else
-        abort "Devweb settings file not found in #{confDir}"
+        abort "Workspace settings file not found in #{confDir}"
     end
 
-    Devweb.configure(config, settings)
+    Workspace.configure(config, settings)
 
     if File.exist? afterScriptPath then
         config.vm.provision "Run after.sh", type: "shell", path: afterScriptPath, privileged: false, keep_color: true

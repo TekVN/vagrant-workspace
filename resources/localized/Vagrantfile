@@ -5,10 +5,10 @@ require 'json'
 require 'yaml'
 
 VAGRANTFILE_API_VERSION ||= "2"
-confDir = $confDir ||= File.expand_path("vendor/dnt/devweb", File.dirname(__FILE__))
+confDir = $confDir ||= File.expand_path("vendor/vinacoder/workspace", File.dirname(__FILE__))
 
-configPath = File.expand_path("Devweb.yaml", File.dirname(__FILE__))
-configJsonPath = File.expand_path("Devweb.json", File.dirname(__FILE__))
+configPath = File.expand_path("Workspace.yaml", File.dirname(__FILE__))
+configJsonPath = File.expand_path("Workspace.json", File.dirname(__FILE__))
 afterScriptPath = "after.sh"
 customizationScriptPath = "user-customizations.sh"
 aliasesPath = "aliases"
@@ -30,10 +30,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     elsif File.exist? configJsonPath then
         settings = JSON::parse(File.read(configJsonPath))
     else
-        abort "Devweb settings file not found in " + File.dirname(__FILE__)
+        abort "Workspace settings file not found in " + File.dirname(__FILE__)
     end
 
-    Devweb.configure(config, settings)
+    Workspace.configure(config, settings)
 
     if File.exist? afterScriptPath then
         config.vm.provision "shell", path: afterScriptPath, privileged: false, keep_color: true

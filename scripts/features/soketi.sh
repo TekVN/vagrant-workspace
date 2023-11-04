@@ -28,8 +28,8 @@ cat >$HOMEUSER/.soketi/config.json <<EOF
     "port": 6002,
     "appManager.array.apps": [
         {
-            "id": "devweb",
-            "key": "devweb",
+            "id": "workspace",
+            "key": "workspace",
             "secret": "secretkey"
         }
     ]

@@ -14,11 +14,11 @@ folders:
       to: /var/www
 
 sites:
-    - map: devweb.test
+    - map: workspace.test
       to: /var/www/laravel/public
 
 databases:
-    - devweb
+    - workspace
 
 features:
     - mysql: true

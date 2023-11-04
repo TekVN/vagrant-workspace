@@ -1,6 +1,6 @@
 <?php
 
-namespace DNT\Devweb\Settings;
+namespace VinaCoder\Workspace\Settings;
 
 abstract class Settings
 {
@@ -30,7 +30,7 @@ abstract class Settings
     abstract public static function fromFile($filename);
 
     /**
-     * Save the devweb settings.
+     * Save the workspace settings.
      *
      * @param  string  $filename
      * @return void
@@ -38,7 +38,7 @@ abstract class Settings
     abstract public function save($filename);
 
     /**
-     * Update the devweb settings.
+     * Update the workspace settings.
      *
      * @param  array  $attributes
      * @return static

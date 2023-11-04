@@ -3,8 +3,8 @@
 namespace Tests;
 
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
-use DNT\Devweb\MakeCommand;
-use DNT\Devweb\Traits\GeneratesSlugs;
+use VinaCoder\Workspace\MakeCommand;
+use VinaCoder\Workspace\Traits\GeneratesSlugs;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Yaml\Yaml;
@@ -21,7 +21,7 @@ class MakeCommandTest extends TestCase
 
         $tester->execute([]);
 
-        $this->assertStringContainsString('Devweb Installed!', $tester->getDisplay());
+        $this->assertStringContainsString('Workspace Installed!', $tester->getDisplay());
     }
 
     /** @test */
@@ -184,15 +184,15 @@ class MakeCommandTest extends TestCase
             '--example' => true,
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml.example');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml.example');
     }
 
     /** @test */
     public function an_existing_example_yaml_settings_is_not_overwritten()
     {
         file_put_contents(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml.example',
-            'name: Already existing Devweb.yaml.example'
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml.example',
+            'name: Already existing Workspace.yaml.example'
         );
         $tester = new CommandTester(new MakeCommand());
 
@@ -200,11 +200,11 @@ class MakeCommandTest extends TestCase
             '--example' => true,
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml.example');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml.example');
 
         $this->assertStringEqualsFile(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml.example',
-            'name: Already existing Devweb.yaml.example'
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml.example',
+            'name: Already existing Workspace.yaml.example'
         );
     }
 
@@ -218,15 +218,15 @@ class MakeCommandTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json.example');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json.example');
     }
 
     /** @test */
     public function an_existing_example_json_settings_is_not_overwritten()
     {
         file_put_contents(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json.example',
-            '{"name": "Already existing Devweb.json.example"}'
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json.example',
+            '{"name": "Already existing Workspace.json.example"}'
         );
         $tester = new CommandTester(new MakeCommand());
 
@@ -235,11 +235,11 @@ class MakeCommandTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json.example');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json.example');
 
         $this->assertStringEqualsFile(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json.example',
-            '{"name": "Already existing Devweb.json.example"}'
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json.example',
+            '{"name": "Already existing Workspace.json.example"}'
         );
     }
 
@@ -250,23 +250,23 @@ class MakeCommandTest extends TestCase
 
         $tester->execute([]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml');
     }
 
     /** @test */
     public function an_existing_yaml_settings_is_not_overwritten()
     {
         file_put_contents(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml',
-            'name: Already existing Devweb.yaml'
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml',
+            'name: Already existing Workspace.yaml'
         );
         $tester = new CommandTester(new MakeCommand());
 
         $tester->execute([]);
 
         $this->assertStringEqualsFile(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml',
-            'name: Already existing Devweb.yaml'
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml',
+            'name: Already existing Workspace.yaml'
         );
     }
 
@@ -279,23 +279,23 @@ class MakeCommandTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json');
     }
 
     /** @test */
     public function an_existing_json_settings_is_not_overwritten()
     {
         file_put_contents(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json',
-            '{"message": "Already existing Devweb.json"}'
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json',
+            '{"message": "Already existing Workspace.json"}'
         );
         $tester = new CommandTester(new MakeCommand());
 
         $tester->execute([]);
 
         $this->assertStringEqualsFile(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json',
-            '{"message": "Already existing Devweb.json"}'
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json',
+            '{"message": "Already existing Workspace.json"}'
         );
     }
 
@@ -303,18 +303,18 @@ class MakeCommandTest extends TestCase
     public function a_yaml_settings_is_created_from_a_yaml_example_if_it_exists()
     {
         file_put_contents(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml.example',
-            "message: 'Already existing Devweb.yaml.example'"
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml.example',
+            "message: 'Already existing Workspace.yaml.example'"
         );
         $tester = new CommandTester(new MakeCommand());
 
         $tester->execute([]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml');
 
         $this->assertStringContainsString(
-            "message: 'Already existing Devweb.yaml.example'",
-            file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml')
+            "message: 'Already existing Workspace.yaml.example'",
+            file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml')
         );
     }
 
@@ -322,8 +322,8 @@ class MakeCommandTest extends TestCase
     public function a_yaml_settings_created_from_a_yaml_example_can_override_the_ip_address()
     {
         copy(
-            __DIR__ . '/../resources/Devweb.yaml',
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml.example'
+            __DIR__ . '/../resources/Workspace.yaml',
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml.example'
         );
 
         $tester = new CommandTester(new MakeCommand());
@@ -332,9 +332,9 @@ class MakeCommandTest extends TestCase
             '--ip' => '192.168.10.11',
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml');
 
-        $settings = Yaml::parse(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml'));
+        $settings = Yaml::parse(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml'));
 
         $this->assertEquals('192.168.10.11', $settings['ip']);
     }
@@ -343,8 +343,8 @@ class MakeCommandTest extends TestCase
     public function a_json_settings_is_created_from_a_json_example_if_is_requested_and_if_it_exists()
     {
         file_put_contents(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json.example',
-            '{"message": "Already existing Devweb.json.example"}'
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json.example',
+            '{"message": "Already existing Workspace.json.example"}'
         );
         $tester = new CommandTester(new MakeCommand());
 
@@ -352,11 +352,11 @@ class MakeCommandTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json');
 
         $this->assertStringContainsString(
-            '"message": "Already existing Devweb.json.example"',
-            file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json')
+            '"message": "Already existing Workspace.json.example"',
+            file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json')
         );
     }
 
@@ -364,8 +364,8 @@ class MakeCommandTest extends TestCase
     public function ajson_settings_created_from_a_json_example_can_override_the_ip_address()
     {
         copy(
-            __DIR__ . '/../resources/Devweb.json',
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json.example'
+            __DIR__ . '/../resources/Workspace.json',
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json.example'
         );
 
         $tester = new CommandTester(new MakeCommand());
@@ -375,9 +375,9 @@ class MakeCommandTest extends TestCase
             '--ip' => '192.168.10.11',
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json');
 
-        $settings = json_decode(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json'), true);
+        $settings = json_decode(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json'), true);
 
         $this->assertEquals('192.168.10.11', $settings['ip']);
     }
@@ -393,9 +393,9 @@ class MakeCommandTest extends TestCase
             '--ip' => '127.0.0.1',
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml');
 
-        $settings = Yaml::parse(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml'));
+        $settings = Yaml::parse(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml'));
 
         self::assertArraySubset([
             'name' => 'test_name',
@@ -416,9 +416,9 @@ class MakeCommandTest extends TestCase
             '--ip' => '127.0.0.1',
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json');
 
-        $settings = json_decode(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json'), true);
+        $settings = json_decode(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json'), true);
 
         self::assertArraySubset([
             'name' => 'test_name',
@@ -434,12 +434,12 @@ class MakeCommandTest extends TestCase
 
         $tester->execute([]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml');
 
-        $settings = Yaml::parse(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml'));
+        $settings = Yaml::parse(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml'));
 
         $this->assertEquals([
-            'map' => 'devweb.test',
+            'map' => 'workspace.test',
             'to' => '/var/www/laravel/public',
         ], $settings['sites'][0]);
     }
@@ -453,12 +453,12 @@ class MakeCommandTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json');
 
-        $settings = json_decode(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json'), true);
+        $settings = json_decode(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json'), true);
 
         $this->assertEquals([
-            'map' => 'devweb.test',
+            'map' => 'workspace.test',
             'to' => '/var/www/laravel/public',
         ], $settings['sites'][0]);
     }
@@ -470,11 +470,11 @@ class MakeCommandTest extends TestCase
 
         $tester->execute([]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml');
 
         $projectDirectory = basename(getcwd());
         $projectName = $this->slug($projectDirectory);
-        $settings = Yaml::parse(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml'));
+        $settings = Yaml::parse(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml'));
 
         // The "map" is not tested for equality because getcwd() (The method to obtain the project path)
         // returns a directory in a different location that the test directory itself.
@@ -500,11 +500,11 @@ class MakeCommandTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json');
+        $this->assertFileExists(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json');
 
         $projectDirectory = basename(getcwd());
         $projectName = $this->slug($projectDirectory);
-        $settings = json_decode(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json'), true);
+        $settings = json_decode(file_get_contents(self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json'), true);
 
         // The "map" is not tested for equality because getcwd() (The method to obtain the project path)
         // returns a directory in a different location that the test directory itself.
@@ -525,17 +525,17 @@ class MakeCommandTest extends TestCase
     public function a_warning_is_thrown_if_the_settings_json_and_yaml_exists_at_the_same_time()
     {
         file_put_contents(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.json',
-            '{"message": "Already existing Devweb.json"}'
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.json',
+            '{"message": "Already existing Workspace.json"}'
         );
         file_put_contents(
-            self::$testDirectory . DIRECTORY_SEPARATOR . 'Devweb.yaml',
-            "message: 'Already existing Devweb.yaml'"
+            self::$testDirectory . DIRECTORY_SEPARATOR . 'Workspace.yaml',
+            "message: 'Already existing Workspace.yaml'"
         );
         $tester = new CommandTester(new MakeCommand());
 
         $tester->execute([]);
 
-        $this->assertStringContainsString('WARNING! You have Devweb.yaml AND Devweb.json configuration files', $tester->getDisplay());
+        $this->assertStringContainsString('WARNING! You have Workspace.yaml AND Workspace.json configuration files', $tester->getDisplay());
     }
 }
