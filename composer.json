@@ -1,6 +1,7 @@
 {
     "name": "vinacoder/workspace",
     "description": "Your ideal web development environment.",
+    "homepage": "https://github.com/VinaCoder/vagrant-workspace",
     "require": {
         "php": "^7.4 || ^8.0",
         "symfony/console": "^5.0 || ^6.0",
