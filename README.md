@@ -4,11 +4,11 @@
     <a href="https://github.com/VinaCoder/vagrant-workspace/actions">
         <img src="https://github.com/VinaCoder/vagrant-workspace/workflows/tests/badge.svg" alt="Build Status">
     </a>
-    <a href="https://packagist.org/packages/VinaCoder/vagrant-workspace">
-        <img src="https://img.shields.io/packagist/dt/VinaCoder/vagrant-workspace" alt="Total Downloads">
+    <a href="https://packagist.org/packages/VinaCoder/workspace">
+        <img src="https://img.shields.io/packagist/dt/VinaCoder/workspace" alt="Total Downloads">
     </a>
-    <a href="https://packagist.org/packages/VinaCoder/vagrant-workspace">
-        <img src="https://img.shields.io/packagist/v/VinaCoder/vagrant-workspace" alt="Latest Stable Version">
+    <a href="https://packagist.org/packages/VinaCoder/workspace">
+        <img src="https://img.shields.io/packagist/v/VinaCoder/workspace" alt="Latest Stable Version">
     </a>
 </p>
 
@@ -37,3 +37,5 @@
 -   Tools/Extension: Heroku cli, PHP Trader
 -   Storage: Minio
 -   Queue: RabbitMQ
+
+<a href="https://www.buymeacoffee.com/ducconit" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee"></a>
