@@ -17,7 +17,7 @@ class Workspace
 
     # Configure The Box
     config.vm.define settings['name'] ||= 'workspace'
-    config.vm.box = settings['box'] ||= 'ducconit/devweb'
+    config.vm.box = settings['box'] ||= 'ducconit/workspace'
     unless settings.has_key?('SpeakFriendAndEnter')
       config.vm.box_version = settings['version'] ||= '>=1.0.0'
     end
@@ -708,7 +708,7 @@ class Workspace
     now = Time.now.strftime("%Y%m%d%H%M")
     config.trigger.before :destroy do |trigger|
       trigger.warn = "Backing up postgres database #{database}..."
-      trigger.run_remote = {inline: "mkdir -p #{dir}/#{now} && echo localhost:5432:#{database}:devweb:secret > ~/.pgpass && chmod 600 ~/.pgpass && pg_dump -U devweb -h localhost #{database} > #{dir}/#{now}/#{database}-#{now}.sql"}
+      trigger.run_remote = {inline: "mkdir -p #{dir}/#{now} && echo localhost:5432:#{database}:workspace:secret > ~/.pgpass && chmod 600 ~/.pgpass && pg_dump -U workspace -h localhost #{database} > #{dir}/#{now}/#{database}-#{now}.sql"}
     end
   end
 

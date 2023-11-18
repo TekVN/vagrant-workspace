@@ -143,7 +143,7 @@ else
     sudo -i -u vagrant -- cp $2/wp/index.php $2/index.php
     sudo -i -u vagrant -- sed -i "s|/wp-blog-header|/wp/wp-blog-header|g" $2/index.php
     sudo -i -u vagrant -- echo "path: $2/wp/" >$2/wp-cli.yml
-    sudo -i -u vagrant -- wp config create --path=$2/wp/ --dbname=${1/./_} --dbuser=devweb --dbpass=secret --dbcollate=utf8_general_ci
+    sudo -i -u vagrant -- wp config create --path=$2/wp/ --dbname=${1/./_} --dbuser=workspace --dbpass=secret --dbcollate=utf8_general_ci
     sudo -i -u vagrant -- mv $2/wp/wp-config.php $2/wp-config.php
     sudo -i -u vagrant -- sed -i 's|'"$wpConfigSearchStr"'|'"$wpConfigReplaceStr"'|g' $2/wp-config.php
     sudo -i -u vagrant -- sed -i "s|define( 'ABSPATH', dirname( __FILE__ ) . '/' );|define( 'ABSPATH', __DIR__ . '/wp/' );|g" $2/wp-config.php

@@ -9,7 +9,7 @@ EOF
 
 cat >/home/vagrant/.my.cnf <<EOF
 [client]
-user = devweb
+user = workspace
 password = secret
 host = 127.0.0.1
 EOF
