@@ -65,7 +65,7 @@ class MakeCommand extends Command
      * @param  \Symfony\Component\Console\Output\OutputInterface  $output
      * @return int
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!$this->vagrantfileExists()) {
             $this->createVagrantfile();
