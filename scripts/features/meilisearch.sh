@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -f ~/.features/wsl_user_name ]; then
     WSL_USER_NAME="$(cat ~/.features/wsl_user_name)"
