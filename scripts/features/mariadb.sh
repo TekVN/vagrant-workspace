@@ -32,8 +32,19 @@ rm -rf /var/lib/mysql/*
 rm -rf /var/log/mysql
 rm -rf /etc/mysql
 
+# Determine version from config
+
+set -- "$1"
+IFS="."
+
 # Add Maria PPA
-curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+if [ -z "${version}" ]; then
+    curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+else
+    curl -LsS -O https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+    sudo bash mariadb_repo_setup --mariadb-server-version="$version"
+    echo "MariaDB specific target version : $version"
+fi
 
 debconf-set-selections <<<"mariadb-server mysql-server/data-dir select ''"
 debconf-set-selections <<<"mariadb-server mysql-server/root_password password secret"
@@ -56,17 +67,17 @@ EOF
 
 export MYSQL_PWD=secret
 
-mysql --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO root@'localhost' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
-mysql --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
-service mysql restart
+mariadb --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO root@'localhost' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mariadb --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+service mariadb restart
 
-mysql --user="root" --password="secret" -h localhost -e "CREATE USER IF NOT EXISTS 'workspace'@'0.0.0.0' IDENTIFIED BY 'secret';"
-mysql --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO 'workspace'@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
-mysql --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO 'workspace'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
-mysql --user="root" --password="secret" -h localhost -e "FLUSH PRIVILEGES;"
-service mysql restart
+mariadb --user="root" --password="secret" -h localhost -e "CREATE USER IF NOT EXISTS 'workspace'@'0.0.0.0' IDENTIFIED BY 'secret';"
+mariadb --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO 'workspace'@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mariadb --user="root" --password="secret" -h localhost -e "GRANT ALL ON *.* TO 'workspace'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mariadb --user="root" --password="secret" -h localhost -e "FLUSH PRIVILEGES;"
+service mariadb restart
 
-mysql_upgrade --user="root" --verbose --force
-service mysql restart
+mariadb_upgrade --user="root" --verbose --force
+service mariadb restart
 
 unset MYSQL_PWD
