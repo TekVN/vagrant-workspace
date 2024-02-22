@@ -417,7 +417,7 @@ class Workspace
               site['to'],                 # $2
               site['port'] ||= http_port, # $3
               site['ssl'] ||= https_port, # $4
-              site['php'] ||= '8.2',      # $5
+              site['php'] ||= '8.3',      # $5
               params ||= '',              # $6
               site['xhgui'] ||= '',       # $7
               site['exec'] ||= 'false',   # $8
@@ -539,6 +539,11 @@ class Workspace
 
         config.vm.provision 'shell' do |s|
           s.inline = "echo \"\nenv[$1] = '$2'\" >> /etc/php/8.2/fpm/pool.d/www.conf"
+          s.args = [var['key'], var['value']]
+        end
+
+        config.vm.provision 'shell' do |s|
+          s.inline = "echo \"\nenv[$1] = '$2'\" >> /etc/php/8.3/fpm/pool.d/www.conf"
           s.args = [var['key'], var['value']]
         end
 
