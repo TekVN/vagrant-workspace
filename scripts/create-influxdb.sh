@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-influx -execute "create database $1"
+influx bucket create --token="workspace_secret" --name="$1" --org="workspace"

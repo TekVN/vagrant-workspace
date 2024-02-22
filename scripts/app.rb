@@ -212,6 +212,9 @@ class Workspace
 
           if folder['type'] == 'nfs'
             mount_opts = folder['mount_options'] ? folder['mount_options'] : ['actimeo=1', 'nolock']
+
+            # Ubuntu 22.04 does not support NFS UDP, so we need to ensure it is disabled
+            nfs_options = {nfs_udp: false}
           elsif folder['type'] == 'smb'
             mount_opts = folder['mount_options'] ? folder['mount_options'] : ['vers=3.02', 'mfsymlinks']
 
@@ -219,6 +222,10 @@ class Workspace
           end
 
           # For b/w compatibility keep separate 'mount_opts', but merge with options
+          options = (folder['options'] || {})
+          .merge({ mount_options: mount_opts })
+          .merge(smb_creds || {})
+          .merge(nfs_options || {})
           options = (folder['options'] || {}).merge({ mount_options: mount_opts }).merge(smb_creds || {})
 
           # Double-splat (**) operator only works with symbol keys, so convert
@@ -247,7 +254,7 @@ class Workspace
     if settings.has_key?('php') && settings['php']
       config.vm.provision "Changing PHP CLI Version", type: "shell" do |s|
         s.name = 'Changing PHP CLI Version'
-        s.inline = "sudo update-alternatives --set php /usr/bin/php#{settings['php']};"
+        s.inline = "sudo update-alternatives --set php /usr/bin/php#{settings['php']}; sudo update-alternatives --set php-config /usr/bin/php-config#{settings['php']}; sudo update-alternatives --set phpize /usr/bin/phpize#{settings['php']}"
       end
     end
 
@@ -574,8 +581,13 @@ class Workspace
         end
       end
 
+      # Enable MySQL if MariaDB is not enabled
+      if (!enabled_databases.include? 'mysql') && (!enabled_databases.include? 'mariadb')
+        enabled_databases.push 'mysql'
+      end
+
       settings['databases'].each do |db|
-        if (enabled_databases.include? 'mysql') || (enabled_databases.include? 'mysql8') || (enabled_databases.include? 'mariadb')
+        if (enabled_databases.include? 'mysql') || (enabled_databases.include? 'mariadb')
           config.vm.provision 'shell' do |s|
             s.name = 'Creating MySQL / MariaDB Database: ' + db
             s.path = script_dir + '/create-mysql.sh'
@@ -666,6 +678,11 @@ class Workspace
 
           enabled_databases.push feature_name
         end
+      end
+
+      # Enable MySQL if MariaDB is not enabled
+      if (!enabled_databases.include? 'mysql') && (!enabled_databases.include? 'mariadb')
+        enabled_databases.push 'mysql'
       end
 
       # Loop over each DB

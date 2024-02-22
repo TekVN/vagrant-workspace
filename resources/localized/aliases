@@ -62,18 +62,26 @@ function pf() {
 
 function php74() {
     sudo update-alternatives --set php /usr/bin/php7.4
+    sudo update-alternatives --set php-config /usr/bin/php-config7.4
+    sudo update-alternatives --set phpize /usr/bin/phpize7.4
 }
 
 function php80() {
     sudo update-alternatives --set php /usr/bin/php8.0
+    sudo update-alternatives --set php-config /usr/bin/php-config8.0
+    sudo update-alternatives --set phpize /usr/bin/phpize8.0
 }
 
 function php81() {
     sudo update-alternatives --set php /usr/bin/php8.1
+    sudo update-alternatives --set php-config /usr/bin/php-config8.1
+    sudo update-alternatives --set phpize /usr/bin/phpize8.1
 }
 
 function php82() {
     sudo update-alternatives --set php /usr/bin/php8.2
+    sudo update-alternatives --set php-config /usr/bin/php-config8.2
+    sudo update-alternatives --set phpize /usr/bin/phpize8.2
 }
 
 function serve-laravel() {
