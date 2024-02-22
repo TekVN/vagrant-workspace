@@ -15,8 +15,6 @@ if [ -f /home/$WSL_USER_NAME/.features/trader ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/trader
-
 # Update PECL Channel
 sudo pecl channel-update pecl.php.net
 
@@ -85,3 +83,6 @@ sudo ln -s /etc/php/5.6/mods-available/trader.ini /etc/php/5.6/fpm/conf.d/20-tra
 sudo ln -s /etc/php/5.6/mods-available/trader.ini /etc/php/5.6/cgi/conf.d/20-trader.ini
 sudo ln -s /etc/php/5.6/mods-available/trader.ini /etc/php/5.6/cli/conf.d/20-trader.ini
 sudo ln -s /etc/php/5.6/mods-available/trader.ini /etc/php/5.6/phpdbg/conf.d/20-trader.ini
+
+touch /home/$WSL_USER_NAME/.features/trader
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP $HOMEUSER/.features

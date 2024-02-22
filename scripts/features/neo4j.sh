@@ -15,11 +15,9 @@ if [ -f /home/$WSL_USER_NAME/.features/neo4j ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/neo4j
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
+wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo apt-key add -
+echo 'deb https://debian.neo4j.com stable latest' | sudo tee /etc/apt/sources.list.d/neo4j.list
 
-wget -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
-echo 'deb https://debian.neo4j.org/repo stable/' | sudo tee -a /etc/apt/sources.list.d/neo4j.list
 apt-get update
 
 # Install Neo4j Community Edition
@@ -49,3 +47,6 @@ cypher-shell -u neo4j -p secret "CALL dbms.security.createUser('workspace', 'sec
 
 # Delete default Neo4j user
 cypher-shell -u workspace -p secret "CALL dbms.security.deleteUser('neo4j');"
+
+touch /home/$WSL_USER_NAME/.features/neo4j
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

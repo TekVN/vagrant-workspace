@@ -15,8 +15,8 @@ if [ -f /home/$WSL_USER_NAME/.features/heroku ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/heroku
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
 # Install Heroku CLI
 curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
+touch /home/$WSL_USER_NAME/.features/heroku
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

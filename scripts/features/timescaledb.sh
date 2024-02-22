@@ -15,8 +15,6 @@ if [ -f /home/$WSL_USER_NAME/.features/timescale ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/timescale
-
 curl -fsSL https://packagecloud.io/timescale/timescaledb/gpgkey | sudo gpg --dearmor -o /etc/apt/keyrings/timescaledb.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/timescaledb.gpg] https://packagecloud.io/timescale/timescaledb/ubuntu/ jammy main' | sudo tee /etc/apt/sources.list.d/timescaledb.list
 
@@ -28,4 +26,5 @@ printf "\ntimescaledb.telemetry_level=off\n" | sudo tee -a /etc/postgresql/15/ma
 
 sudo service postgresql restart
 
+touch /home/$WSL_USER_NAME/.features/timescale
 chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

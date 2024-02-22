@@ -15,9 +15,6 @@ if [ -f /home/$WSL_USER_NAME/.features/eventstore ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/eventstore
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
 # Determine wanted version from config
 set -- "$1"
 IFS="."
@@ -51,3 +48,6 @@ setcap CAP_NET_BIND_SERVICE=+eip /usr/bin/eventstored
 # Enable and Start EventStore
 systemctl enable eventstore.service
 systemctl start eventstore.service
+
+touch /home/$WSL_USER_NAME/.features/eventstore
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

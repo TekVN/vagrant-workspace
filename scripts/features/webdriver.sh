@@ -15,9 +15,7 @@ if [ -f /home/$WSL_USER_NAME/.features/webdriverutils ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/webdriverutils
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
+ARCH=$(arch)
 # Install The Chrome Web Driver & Dusk Utilities
 if [[ "$ARCH" != "aarch64" ]]; then
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb
@@ -27,3 +25,6 @@ fi
 
 apt-get -y install libxpm4 libxrender1 libgtk2.0-0 libnss3 libgconf-2-4 chromium-browser xvfb gtk2-engines-pixbuf \
     xfonts-cyrillic xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable imagemagick x11-apps
+
+touch /home/$WSL_USER_NAME/.features/webdriverutils
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

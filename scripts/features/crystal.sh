@@ -15,12 +15,10 @@ if [ -f /home/$WSL_USER_NAME/.features/crystal ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/crystal
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
 # Install Crystal Programming Language Support
-curl -sL "https://keybase.io/crystal/pgp_keys.asc" | sudo apt-key add -
-echo "deb https://dist.crystal-lang.org/apt crystal main" | sudo tee /etc/apt/sources.list.d/crystal.list
+curl -fsSL https://keybase.io/crystal/pgp_keys.asc | sudo gpg --dearmor -o /etc/apt/keyrings/crystal.gpg
+echo "deb [signed-by=/etc/apt/keyrings/crystal.gpg] https://dist.crystal-lang.org/apt crystal main" | sudo tee /etc/apt/sources.list.d/crystal.list
+
 apt-get update
 apt-get install -y crystal
 
@@ -35,3 +33,6 @@ mv lucky /usr/local/bin/.
 cd /home/vagrant
 rm -rf lucky_cli-0.11.0
 rm -rf v0.11.0.tar.gz
+
+touch /home/$WSL_USER_NAME/.features/crystal
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

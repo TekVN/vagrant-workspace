@@ -15,9 +15,6 @@ if [ -f /home/$WSL_USER_NAME/.features/rabbitmq ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/rabbitmq
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
 sudo apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y
 
 # Import signing keys
@@ -56,3 +53,6 @@ rabbitmqctl set_topic_permissions -p / workspace ".*" ".*" ".*"
 # Install rabbitmqadmin CLI tool - https://www.rabbitmq.com/management-cli.html
 wget -q http://localhost:15672/cli/rabbitmqadmin -O /usr/local/bin/rabbitmqadmin
 chmod +x /usr/local/bin/rabbitmqadmin
+
+touch /home/$WSL_USER_NAME/.features/rabbitmq
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

@@ -15,9 +15,6 @@ if [ -f /home/$WSL_USER_NAME/.features/openresty ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/openresty
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
 # Install Openresty
 curl -fsSL https://openresty.org/package/pubkey.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/openresty.gpg
 echo "deb [signed-by=/etc/apt/keyrings/openresty.gpg] http://openresty.org/package/ubuntu jammy main" | sudo tee /etc/apt/sources.list.d/openresty.list
@@ -31,3 +28,6 @@ sudo sed -i "s/listen\s*80;/listen\       8888;/g" /etc/openresty/nginx.conf
 
 sudo service openresty restart
 sudo service nginx start
+
+touch /home/$WSL_USER_NAME/.features/openresty
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

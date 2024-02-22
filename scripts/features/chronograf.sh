@@ -15,9 +15,6 @@ if [ -f /home/$WSL_USER_NAME/.features/chronograf ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/chronograf
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
 chronourl="https://dl.influxdata.com/chronograf/releases/chronograf_1.5.0.1_amd64.deb"
 
 wget -q -O chronograf.deb $chronourl
@@ -27,3 +24,6 @@ rm chronograf.deb
 systemctl enable chronograf
 systemctl daemon-reload
 systemctl start chronograf
+
+touch /home/$WSL_USER_NAME/.features/chronograf
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

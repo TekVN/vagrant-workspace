@@ -15,12 +15,10 @@ if [ -f /home/$WSL_USER_NAME/.features/cassandra ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/cassandra
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
 # Install Cassandra and driver dependencies
-echo "deb http://www.apache.org/dist/cassandra/debian 311x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
-wget -q -O - https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
+echo "deb https://debian.cassandra.apache.org 41x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
+
 sudo DEBIAN_FRONTEND=noninteractive apt update
 sudo DEBIAN_FRONTEND=noninteractive apt install cassandra openjdk-8-jdk git libgmp-dev -y
 
@@ -53,3 +51,6 @@ sudo rm -R /usr/src/php-driver
 echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" | sudo tee -a /etc/default/cassandra
 sudo service cassandra stop
 sudo service cassandra start
+
+touch /home/$WSL_USER_NAME/.features/cassandra
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

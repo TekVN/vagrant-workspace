@@ -15,9 +15,6 @@ if [ -f /home/$WSL_USER_NAME/.features/logstash ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/logstash
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
 # Determine version from config
 
 set -- "$1"
@@ -35,11 +32,10 @@ echo "Logstash installVersion: $installVersion"
 echo "Logstash majorVersion: $majorVersion"
 
 # Install Java & Logstash
-
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+url -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /etc/apt/keyrings/elasticsearch.gpg
 
 if [ ! -f /etc/apt/sources.list.d/elastic-$majorVersion.x.list ]; then
-    echo "deb https://artifacts.elastic.co/packages/$majorVersion.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-$majorVersion.x.list
+    echo "deb [signed-by=/etc/apt/keyrings/elasticsearch.gpg] https://artifacts.elastic.co/packages/$majorVersion.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-$majorVersion.x.list
 fi
 
 sudo apt-get update
@@ -49,3 +45,6 @@ sudo apt-get -y install logstash"$installVersion"
 # Enable Start Elasticsearch
 
 sudo systemctl enable --now logstash.service
+
+touch /home/$WSL_USER_NAME/.features/logstash
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

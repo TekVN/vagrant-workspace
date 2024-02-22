@@ -15,9 +15,6 @@ if [ -f /home/$WSL_USER_NAME/.features/solr ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/solr
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
 # Install Java Runtime Enviroment
 sudo apt update
 sudo apt install default-jre php-solr -y
@@ -31,3 +28,6 @@ rm solr-7.7.1.tgz install_solr_service.sh
 # Install Workspace Core
 
 sudo su -c "/opt/solr/bin/solr create -c workspace" solr
+
+touch /home/$WSL_USER_NAME/.features/solr
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

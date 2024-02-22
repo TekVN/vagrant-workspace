@@ -54,7 +54,7 @@ stopsignal=sigint
 minfds=10240
 EOF
 
+supervisorctl update
+
 chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP $HOMEUSER/.features
 chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP $HOMEUSER/.soketi
-
-supervisorctl reread && supervisorctl reload

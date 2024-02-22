@@ -15,9 +15,6 @@ if [ -f /home/$WSL_USER_NAME/.features/golang ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/golang
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
 ARCH=$(arch)
 
 # Install Golang
@@ -32,3 +29,6 @@ fi
 tar -C /usr/local -xzf golang.tar.gz go
 printf "\nPATH=\"/usr/local/go/bin:\$PATH\"\n" | tee -a /home/vagrant/.profile
 rm -rf golang.tar.gz
+
+touch /home/$WSL_USER_NAME/.features/golang
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features

@@ -15,9 +15,6 @@ if [ -f /home/$WSL_USER_NAME/.features/elasticsearch ]; then
     exit 0
 fi
 
-touch /home/$WSL_USER_NAME/.features/elasticsearch
-chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
-
 # Determine version from config
 
 set -- "$1"
@@ -35,11 +32,10 @@ echo "Elasticsearch installVersion: $installVersion"
 echo "Elasticsearch majorVersion: $majorVersion"
 
 # Install Java & Elasticsearch
-
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /etc/apt/keyrings/elasticsearch.gpg
 
 if [ ! -f /etc/apt/sources.list.d/elastic-$majorVersion.x.list ]; then
-    echo "deb https://artifacts.elastic.co/packages/$majorVersion.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-$majorVersion.x.list
+    echo "deb [signed-by=/etc/apt/keyrings/elasticsearch.gpg] https://artifacts.elastic.co/packages/$majorVersion.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-$majorVersion.x.list
 fi
 
 sudo apt-get update
@@ -58,3 +54,6 @@ sudo sed -i "s/#cluster.name: my-application/cluster.name: workspace/" /etc/elas
 
 sudo systemctl enable elasticsearch.service
 sudo service elasticsearch start
+
+touch /home/$WSL_USER_NAME/.features/elasticsearch
+chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.features
