@@ -22,8 +22,9 @@ apt install temurin-11-jdk -y
 wget -q https://downloads.metabase.com/v0.48.7/metabase.jar
 groupadd -r metabase
 useradd -r -s /bin/false -g metabase metabase
-mkdir -p /opt/metabase && chown -R metabase:metabase /opt/metabase
+mkdir -p /opt/metabase
 mv metabase.jar /opt/metabase
+chown -R metabase:metabase /opt/metabase
 
 /vagrant/scripts/create-mysql.sh metabase
 /vagrant/scripts/create-postgres.sh metabase
