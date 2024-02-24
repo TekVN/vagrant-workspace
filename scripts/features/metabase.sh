@@ -24,13 +24,6 @@ groupadd -r metabase
 useradd -r -s /bin/false -g metabase metabase
 mkdir -p /opt/metabase && chown -R metabase:metabase /opt/metabase
 mv metabase.jar /opt/metabase
-touch /var/log/metabase.log
-chown syslog:adm /var/log/metabase.log
-cat <<EOT >/etc/rsyslog.d/metabase.conf
-if $programname == 'metabase' then /var/log/metabase.log
-& stop
-EOT
-systemctl restart rsyslog.service
 
 /vagrant/scripts/create-mysql.sh metabase
 /vagrant/scripts/create-postgres.sh metabase
@@ -62,11 +55,6 @@ ExecStart=/usr/bin/java -jar /opt/metabase/metabase.jar
 EnvironmentFile=/etc/default/metabase
 User=metabase
 Type=simple
-StandardOutput=syslog
-StandardError=syslog
-SyslogIdentifier=metabase
-SuccessExitStatus=143
-TimeoutStopSec=120
 Restart=always
 
 [Install]
