@@ -17,7 +17,7 @@ fi
 
 # Install prometheus
 cd /opt
-wget -qO https://github.com/prometheus/prometheus/releases/download/v2.50.0/prometheus-2.50.0.linux-amd64.tar.gz
+wget -q https://github.com/prometheus/prometheus/releases/download/v2.50.0/prometheus-2.50.0.linux-amd64.tar.gz
 tar -xf prometheus-2.50.0.linux-amd64.tar.gz
 mv prometheus-2.50.0.linux-amd64 prometheus
 rm prometheus-2.50.0.linux-amd64.tar.gz
