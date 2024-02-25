@@ -632,6 +632,13 @@ class Workspace
           end
         end
 
+        if enabled_databases.include? 'clickhouse'
+            config.vm.provision 'shell' do |s|
+              s.name = 'Creating Clickhouse Database: ' + db
+              s.path = script_dir + '/create-clickhouse.sh'
+              s.args = [db]
+            end
+          end
       end
     end
 
