@@ -19,7 +19,7 @@ class Workspace
     config.vm.define settings['name'] ||= 'workspace'
     config.vm.box = settings['box'] ||= 'ducconit/workspace'
     unless settings.has_key?('SpeakFriendAndEnter')
-      config.vm.box_version = settings['version'] ||= '>=1.0.0'
+      config.vm.box_version = settings['version'] ||= '>=1.0.0, <1.2.0'
     end
     config.vm.hostname = settings['hostname'] ||= 'workspace'
 
