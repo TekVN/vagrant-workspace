@@ -226,7 +226,6 @@ class Workspace
           .merge({ mount_options: mount_opts })
           .merge(smb_creds || {})
           .merge(nfs_options || {})
-          options = (folder['options'] || {}).merge({ mount_options: mount_opts }).merge(smb_creds || {})
 
           # Double-splat (**) operator only works with symbol keys, so convert
           options.keys.each{|k| options[k.to_sym] = options.delete(k) }
